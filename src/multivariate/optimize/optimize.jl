@@ -34,7 +34,7 @@ function optimize(d::D, initial_x::Tx, method::M,
         error("You cannot use NelderMead for univariate problems. Alternatively, use either interval bound univariate optimization, or another method such as BFGS or Newton.")
     end
 
-   t0 = time() # Initial time stamp used to control early stopping by options.time_limit
+    t0 = time() # Initial time stamp used to control early stopping by options.time_limit
 
     tr = OptimizationTrace{typeof(value(d)), typeof(method)}()
     tracing = options.store_trace || options.show_trace || options.extended_trace || options.callback != nothing
@@ -88,7 +88,7 @@ function optimize(d::D, initial_x::Tx, method::M,
 
     # we can just check minimum, as we've earlier enforced same types/eltypes
     # in variables besides the option settings
-    Tf = typeof(options.f_tol)
+    Tf = typeof(value(d))
     f_incr_pick = f_increased && !options.allow_f_increases
 
     return MultivariateOptimizationResults{typeof(method),T,Tx,typeof(x_abschange(state)),Tf,typeof(tr)}(method,
